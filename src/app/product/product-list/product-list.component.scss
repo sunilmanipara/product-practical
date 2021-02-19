@@ -1,0 +1,132 @@
+.add-product {
+    margin: 20px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.add-floating {
+    position: fixed;
+    right: 25px;
+    bottom: 15px;
+}
+
+.add-btn {
+    background-color: #36f;
+    color: #fff;
+    border-radius: 30px;
+    outline: none;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.product-list {
+    margin: 20px;
+    border: 1px solid #36f;
+    border-radius: 3px;
+    padding: 10px;
+    display: flex;
+}
+
+.filter-sec {
+    width: 100px;
+    border-right: 1px solid #36f;
+}
+.product-section {
+    border: 1px solid;
+    margin-left: 10px;
+    padding: 5px;
+    width: 230px;
+}
+.products {
+    cursor: pointer;
+    word-break: break-all;
+}
+.products img {
+    width: 100px;
+}
+.action {
+    display: flex;
+    justify-content: space-evenly;
+    cursor: pointer;
+}
+.no-data-found {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    font-size: 18px;
+    font-weight: bold;
+}
+.show-product {
+    display: flex;
+    overflow: auto;
+}
+
+/*
+** Style Simple Ecommerce Theme for Bootstrap 4
+** Created by T-PHP https://t-php.fr/43-theme-ecommerce-bootstrap-4.html
+*/
+.category_block li:hover a {
+    color: #ffffff;
+}
+.category_block li a {
+    color: #343a40;
+}
+
+.product-list-section {
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+.card-img-top {
+    width: 100%;
+    border-top-left-radius: calc(0.25rem - 1px);
+    border-top-right-radius: calc(0.25rem - 1px);
+    height: 150px;
+}
+.card-bottom {
+    margin-bottom: 20px;
+}
+.product-title {
+    margin-top: 10px;
+}
+.price {
+    color: #c01508;
+}
+.footer-links {
+    font-size: 14px;
+    letter-spacing: 0.5px;
+}
+.cursorpointer {
+    cursor: pointer;
+}
+.nodata-found {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+}
+.stock-lbl {
+    display: flex;
+    align-items: center;
+}
+.instock {
+    margin-left: 6px;
+    margin-bottom: -2px;
+}
+.actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    font-size: 22px;
+}
+.like-heart {
+    color: #ff0000;
+}
+.add-icon {
+    background: #007bff;
+    padding: 9px 9px 7px 11px;
+    border-radius: 30px;
+    color: #fff;
+    font-size: 25px;
+    outline: none;
+}

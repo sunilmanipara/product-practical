@@ -1,0 +1,109 @@
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <div class="container">
+        <div class="navbar-brand">Home</div>
+
+        <div class="collapse navbar-collapse justify-content-end" id="navbarsExampleDefault">
+            <form class="form-inline my-2 my-lg-0">
+                <div class="input-group input-group-sm">
+                    <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
+                        placeholder="Search..." (keyup)="searchProduct($event)">
+                    <div class="input-group-append">
+                        <button type="button" class="btn btn-secondary btn-number">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</nav>
+
+<div class="container product-list-section">
+    <div class="row">
+        <div class="col">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-12 col-sm-3">
+            <div class="card bg-light mb-3">
+                <div class="card-header bg-primary text-white text-uppercase">
+                    <i class="fa fa-list"></i> Categories
+                </div>
+                <ul class="list-group category_block">
+                    <li class="list-group-item">
+                        <div>Price</div>
+                        <div> <input type="checkbox" /> 100 - 1000 </div>
+                        <div> <input type="checkbox" /> 1000 - 2000 </div>
+                        <div> <input type="checkbox" /> 2000 - 3000 </div>
+                    </li>
+                    <li class="list-group-item">
+                        <div>Location</div>
+                        <div> <input type="checkbox" (change)="filterByLocation($event, 'ahmedabad')" /> Ahmedabad </div>
+                        <div> <input type="checkbox" (change)="filterByLocation($event, 'surat')" /> Surat </div>
+                        <div> <input type="checkbox" (change)="filterByLocation($event, 'rajkot')" /> Rajkot </div>
+                        <div> <input type="checkbox" (change)="filterByLocation($event, 'baroda')" /> Baroda </div>
+                    </li>
+                    <li class="list-group-item">
+                        <div>Rating</div>
+                        <div> <input type="checkbox" /> 1 </div>
+                        <div> <input type="checkbox" /> 2 </div>
+                        <div> <input type="checkbox" /> 3 </div>
+                        <div> <input type="checkbox" /> 4 </div>
+                        <div> <input type="checkbox" /> 5 </div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="stock-lbl">
+                            <input type="radio" id="instock" name="stock" value="1"
+                                (change)="filterProductStock($event)">
+                            <label for="instock" class="instock">In Stock</label><br>
+                        </div>
+                        <div class="stock-lbl">
+                            <input type="radio" id="outstock" name="stock" value="2"
+                                (change)="filterProductStock($event)">
+                            <label for="outstock" class="instock">Out Stock</label><br>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="col">
+            <div class="row" *ngIf="!noDataFound">
+                <div *ngFor="let product of productArr" class="col-12 col-md-6 col-lg-4 card-bottom">
+                    <div class="card cursorpointer">
+                        <div class="card-body">
+                            <div (click)="gotoProductDetails(product.id)">
+                                <img class="card-img-top" [src]="product.image_url" alt="Card image cap">
+                                <h4 class="product-title card-title"> <b> {{product.title}} </b> </h4>
+                                <p class="card-text">
+                                    {{product.description.length > 70 ? product.description.substring(0, 70) + '...' :
+                                    product.description}}
+                                </p>
+                                <h3 class="price"> <b> $ {{product.price}} </b> </h3>
+                            </div>
+                            <div class="row actions">
+                                <i [class]="product.is_favourite ? 'fa fa-heart like-heart' : 'fa fa-heart-o like-heart'"
+                                    aria-hidden="true" (click)="likeProduct(product.id)"></i>
+                                <i class="fa fa-trash" (click)="removeProduct(product.id)"></i>
+                                <i class="fa fa-pencil-square-o" [routerLink]="[productedit, product.id]"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="noDataFound" class="row nodata-found">
+                {{noDataFound}}
+            </div>
+        </div>
+    </div>
+    <div class="add-floating">
+        <i class="fa fa-plus add-icon cursorpointer" [routerLink]="[productadd]"></i>
+    </div>
+</div>

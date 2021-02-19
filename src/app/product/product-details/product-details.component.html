@@ -1,0 +1,36 @@
+<div class="page-section">
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+        <div class="container details-lbl">
+            <div class="navbar-brand">Product details</div>
+        </div>
+    </nav>
+
+    <div class="container product-list-section">
+        <div class="row">
+            <div class="col">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
+                        <li class="breadcrumb-item"><a [routerLink]="[details ,productId]">Product Details</a></li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+
+    <div class="details-view">
+
+        <div class="imgleft-column easyzoom easyzoom--overlay">
+            <img class="mainimage" [src]="productItems.image_url" />
+            <a [href]="productItems.image_url"></a>
+        </div>
+
+        <div class="contentright-column">
+            <div class="product-description">
+                <h1>{{productItems.title}}</h1>
+                <p> {{productItems.description}} </p>
+                <h2> $ {{productItems.price}} </h2>
+            </div>
+        </div>
+    </div>
+</div>

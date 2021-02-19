@@ -1,0 +1,28 @@
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+html,
+body {
+    height: 100%;
+}
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+// start toaster message css
+.success-snackbar {
+    background: #00d68f !important;
+    color: #fff;
+}
+.error-snackbar {
+    background-color: #ff3d71 !important;
+    color: #fff;
+}
+.mat-simple-snackbar-action button {
+    color: #fff;
+}
+// end toaster message css
+
+.cursorpointer {
+    cursor: pointer;
+}

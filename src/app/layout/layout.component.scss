@@ -1,0 +1,40 @@
+.menuicon {
+    margin-left: 2px;
+}
+.mat-drawer {
+    width: 200px;
+    background: #343a40;
+}
+.sidebar {
+    padding-top: 0 !important;
+}
+.logo {
+    width: 190px;
+    padding: 10px;
+}
+.top-space {
+    margin-top: 10px;
+    border-bottom: 1px solid #525b64;
+    border-top: 1px solid #525b64;
+    color: #fff;
+    outline: none;
+    display: flex;
+    padding: 10px;
+}
+.menus {
+    outline: none;
+    color: #fff;
+    border-bottom: 1px solid #525b64;
+    display: flex;
+    padding: 10px;
+}
+mat-list-item:hover {
+    background: #525b64;
+}
+footer {
+    background: #343a40;
+    padding: 40px;
+}
+footer a {
+    color: #f8f9fa !important;
+}

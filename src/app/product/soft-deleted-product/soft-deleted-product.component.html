@@ -1,0 +1,48 @@
+<div class="page-section">
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+        <div class="container">
+            <div class="navbar-brand">Trash</div>
+        </div>
+    </nav>
+
+    <div class="container product-list-section">
+        <div class="row">
+            <div class="col">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
+                        <li class="breadcrumb-item"><a routerLink="/trash">Trash</a></li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row" *ngIf="!noDataFound">
+            <div *ngFor="let product of productArr" class="col-12 col-sm-6 col-md-4 col-lg-3 col-lx-3 card-bottom">
+                <div class="card cursorpointer">
+                    <div class="card-body">
+                        <div>
+                            <img class="card-img-top" [src]="product.image_url" alt="Card image cap">
+                            <h4 class="card-title"> <b> {{product.title}} </b> </h4>
+                            <p class="card-text">
+                                {{product.description.length > 70 ? product.description.substring(0, 70) + '...'
+                                :
+                                product.description}}
+                            </p>
+                            <h3 class="price"> <b> $ {{product.price}} </b> </h3>
+                        </div>
+                        <div class="row actions">
+                            <i class="fa fa-undo" (click)="restoreProduct(product.id)"></i>
+                            <i class="fa fa-trash" (click)="removeProduct(product.id)"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="noDataFound" class="row nodata-found">
+            {{noDataFound}}
+        </div>
+    </div>
+</div>

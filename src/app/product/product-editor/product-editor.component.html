@@ -1,0 +1,81 @@
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <div class="container header-lbl">
+        <div class="navbar-brand">{{formLabel}}</div>
+    </div>
+</nav>
+
+<form #productform="ngForm" novalidate (ngSubmit)="productform.valid && submitForm()">
+    <div class="product-form">
+        <mat-form-field appearance="outline">
+            <mat-label>Title</mat-label>
+            <!-- maxlength="50" -->
+            <input matInput name="title" placeholder="Title" [(ngModel)]="product.title" #title="ngModel" required>
+            <mat-error *ngIf="title?.touched && title?.errors?.required">
+                This field is required.
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Description</mat-label>
+            <!-- minlength="150" -->
+            <textarea matInput rows="5" name="description" placeholder="Description" [(ngModel)]="product.description"
+                #description="ngModel" required></textarea>
+            <mat-error *ngIf="description?.touched && description?.errors?.required">
+                This field is required.
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Image url</mat-label>
+            <input matInput name="image_url" placeholder="Image url" [(ngModel)]="product.image_url"
+                #image_url="ngModel" required>
+            <mat-error *ngIf="image_url?.touched && image_url?.errors?.required">
+                This field is required.
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Price</mat-label>
+            <input type="number" matInput name="price" placeholder="Price" [(ngModel)]="product.price" #price="ngModel"
+                required>
+            <mat-error *ngIf="price?.touched && price?.errors?.required">
+                This field is required.
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+            <mat-label>Rating</mat-label>
+            <mat-select [(ngModel)]="product.rating" name="rating" #rating="ngModel" required>
+                <mat-option *ngFor="let ratings of ratingArr" [value]="ratings">
+                    {{ratings}}
+                </mat-option>
+            </mat-select>
+            <mat-error *ngIf="rating?.touched && rating?.errors?.required">
+                This field is required.
+            </mat-error>
+        </mat-form-field>
+
+        <div class="places">
+            <mat-label>Location</mat-label>
+            <mat-checkbox name="ahmedabad" [(ngModel)]="product.location.ahmedabad"
+                class="location">
+                Ahmedabad</mat-checkbox>
+            <mat-checkbox name="surat" [(ngModel)]="product.location.surat" class="location">
+                Surat</mat-checkbox>
+            <mat-checkbox name="rajkot" [(ngModel)]="product.location.rajkot" class="location">
+                Rajkot</mat-checkbox>
+            <mat-checkbox name="baroda" [(ngModel)]="product.location.baroda" class="location">
+                Baroda</mat-checkbox>
+        </div>
+
+        <mat-radio-group class="stock-option" name="stock" [(ngModel)]="product.stock" #stock="ngModel">
+            <mat-radio-button value="1" class="instock">In Stock</mat-radio-button>
+            <mat-radio-button value="2">Out Stock</mat-radio-button>
+        </mat-radio-group>
+
+        <div class="buttons">
+            <button mat-button type="button" class="cancel-btn" (click)="goback()">Cancel</button>
+            <button mat-button type="submit" [disabled]="!productform.valid" class="submit-btn">Submit</button>
+        </div>
+    </div>
+</form>

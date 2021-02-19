@@ -1,0 +1,43 @@
+.header-lbl {
+    margin: 0;
+}
+.product-form {
+    display: grid;
+    margin: 20px;
+    border: 1px solid #343a40;
+    border-radius: 5px;
+    padding: 20px;
+}
+.stock-option {
+    margin-top: 20px;
+}
+.instock {
+    margin-right: 10px;
+}
+.places {
+    display: grid;
+}
+.places mat-label {
+    margin-bottom: 12px;
+    padding-top: 3px;
+}
+.location {
+    margin-left: 8px;
+}
+.buttons {
+    margin-top: 20px;
+}
+.cancel-btn {
+    margin-right: 20px;
+    background: gray;
+    color: #fff;
+}
+.submit-btn {
+    background: #36f;
+    color: #fff !important;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
