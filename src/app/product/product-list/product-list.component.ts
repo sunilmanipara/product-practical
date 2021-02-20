@@ -20,9 +20,8 @@ export class ProductListComponent implements OnInit {
   productArr: any = [];
   productItems: any = [];
 
-  searchData: any;
-  filterData: any;
-  locationFilterData: any;
+  search = '';
+  stock: any;
 
   constructor(
     public matDialog: MatDialog,
@@ -60,7 +59,9 @@ export class ProductListComponent implements OnInit {
     filterProduct.is_favourite = !filterProduct.is_favourite;
     this.getAllProducts[index] = filterProduct;
     localStorage.setItem('products', JSON.stringify(this.getAllProducts));
-    this.getDataFromLocalStorage();
+    if (!this.search && !this.stock) {
+      this.getDataFromLocalStorage();
+    }
   }
 
   /**
@@ -79,56 +80,44 @@ export class ProductListComponent implements OnInit {
         this.getAllProducts[index] = filterProduct;
         localStorage.setItem('products', JSON.stringify(this.getAllProducts));
         this.getDataFromLocalStorage();
-        // if (!this.filterData && !this.searchData) {
-        // }
+        if (this.search) {
+          this.searchProduct('search');
+        }
+        if (this.stock) {
+          this.searchProduct();
+        }
       }
     });
   }
 
   /**
    * search product
-   * @param event search value
    */
-  searchProduct(event: any): void {
-    const val = event.target.value;
-    const searchData = this.filterData ? this.filterData : this.productItems;
-    if (val.trim() && searchData) {
-      this.productArr = searchData.filter(item => {
-        return item.title.toLowerCase().indexOf(val.toLowerCase()) > -1 ||
-          item.description.toLowerCase().indexOf(val.toLowerCase()) > -1 ||
-          String(item.price).toLowerCase().indexOf(val.toLowerCase()) > -1 ||
-          String(item.rating).toLowerCase().indexOf(val.toLowerCase()) > -1;
+  searchProduct(search = ''): void {
+    this.productArr = [];
+    if (search) {
+      this.productArr = this.productItems.filter(item => {
+        return this.searchItem(item);
       });
-      this.searchData = this.productArr;
     } else {
-      this.productArr = searchData ? searchData : this.productItems;
+      this.productArr = this.productItems.filter(item => {
+        if (this.stock) {
+          return String(item.stock) === String(this.stock);
+        }
+      });
     }
     this.noDataFound = this.productArr.length === 0 ? general.nodatafound : '';
   }
 
   /**
-   * filter procut base on stock
-   * @param event value
+   * search product
+   * @param item product data
    */
-  filterProductStock(event: any): void {
-    const filterdata = this.searchData ? this.searchData : this.productItems;
-    this.productArr = filterdata.filter(item =>
-      String(item.stock) === String(event.target.defaultValue)
-    );
-    this.filterData = this.productArr;
-    this.noDataFound = this.productArr.length === 0 ? general.nodatafound : '';
-  }
-
-  /**
-   * filter procut base on location
-   * @param event value
-   * @param location locations
-   */
-  filterByLocation(event: any, location: string): void {
-    if (location === 'ahmedabad') {
-      this.locationFilterData = this.getAllProducts.filter(item => item.location.ahmedabad === event.target.checked);
-      this.productArr = this.locationFilterData;
-    }
+  searchItem(item: any): any {
+    return item.title.toLowerCase().indexOf(this.search.trim().toLowerCase()) > -1 ||
+      item.description.toLowerCase().indexOf(this.search.trim().toLowerCase()) > -1 ||
+      String(item.price).toLowerCase().indexOf(this.search.trim().toLowerCase()) > -1 ||
+      String(item.rating).toLowerCase().indexOf(this.search.trim().toLowerCase()) > -1;
   }
 
   /**

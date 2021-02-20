@@ -6,7 +6,8 @@
             <form class="form-inline my-2 my-lg-0">
                 <div class="input-group input-group-sm">
                     <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
-                        placeholder="Search..." (keyup)="searchProduct($event)">
+                        placeholder="Search..." (keyup)="searchProduct('search')" [(ngModel)]="search"
+                        name="search">
                     <div class="input-group-append">
                         <button type="button" class="btn btn-secondary btn-number">
                             <i class="fa fa-search"></i>
@@ -46,28 +47,28 @@
                     </li>
                     <li class="list-group-item">
                         <div>Location</div>
-                        <div> <input type="checkbox" (change)="filterByLocation($event, 'ahmedabad')" /> Ahmedabad </div>
-                        <div> <input type="checkbox" (change)="filterByLocation($event, 'surat')" /> Surat </div>
-                        <div> <input type="checkbox" (change)="filterByLocation($event, 'rajkot')" /> Rajkot </div>
-                        <div> <input type="checkbox" (change)="filterByLocation($event, 'baroda')" /> Baroda </div>
+                        <div> <input type="checkbox" /> Ahmedabad </div>
+                        <div> <input type="checkbox" /> Surat </div>
+                        <div> <input type="checkbox" /> Rajkot </div>
+                        <div> <input type="checkbox" /> Baroda </div>
                     </li>
                     <li class="list-group-item">
                         <div>Rating</div>
-                        <div> <input type="checkbox" /> 1 </div>
-                        <div> <input type="checkbox" /> 2 </div>
-                        <div> <input type="checkbox" /> 3 </div>
-                        <div> <input type="checkbox" /> 4 </div>
-                        <div> <input type="checkbox" /> 5 </div>
+                        <div> <input type="checkbox" value="1" /> 1 </div>
+                        <div> <input type="checkbox" value="2" /> 2 </div>
+                        <div> <input type="checkbox" value="3" /> 3 </div>
+                        <div> <input type="checkbox" value="4" /> 4 </div>
+                        <div> <input type="checkbox" value="5" /> 5 </div>
                     </li>
                     <li class="list-group-item">
                         <div class="stock-lbl">
-                            <input type="radio" id="instock" name="stock" value="1"
-                                (change)="filterProductStock($event)">
+                            <input type="radio" id="instock" name="stock" value="1" (change)="searchProduct()"
+                                [(ngModel)]="stock">
                             <label for="instock" class="instock">In Stock</label><br>
                         </div>
                         <div class="stock-lbl">
-                            <input type="radio" id="outstock" name="stock" value="2"
-                                (change)="filterProductStock($event)">
+                            <input type="radio" id="outstock" name="stock" value="2" (change)="searchProduct()"
+                                [(ngModel)]="stock">
                             <label for="outstock" class="instock">Out Stock</label><br>
                         </div>
                     </li>
