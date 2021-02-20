@@ -1,71 +1,11 @@
-.add-product {
-    margin: 20px;
-    display: flex;
-    justify-content: flex-end;
-}
-
 .add-floating {
     position: fixed;
     right: 25px;
     bottom: 15px;
 }
-
-.add-btn {
-    background-color: #36f;
-    color: #fff;
-    border-radius: 30px;
-    outline: none;
-    padding: 10px;
-    cursor: pointer;
-}
-
-.product-list {
-    margin: 20px;
-    border: 1px solid #36f;
-    border-radius: 3px;
-    padding: 10px;
-    display: flex;
-}
-
-.filter-sec {
-    width: 100px;
-    border-right: 1px solid #36f;
-}
-.product-section {
-    border: 1px solid;
-    margin-left: 10px;
-    padding: 5px;
-    width: 230px;
-}
-.products {
-    cursor: pointer;
+.description {
     word-break: break-all;
 }
-.products img {
-    width: 100px;
-}
-.action {
-    display: flex;
-    justify-content: space-evenly;
-    cursor: pointer;
-}
-.no-data-found {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    font-size: 18px;
-    font-weight: bold;
-}
-.show-product {
-    display: flex;
-    overflow: auto;
-}
-
-/*
-** Style Simple Ecommerce Theme for Bootstrap 4
-** Created by T-PHP https://t-php.fr/43-theme-ecommerce-bootstrap-4.html
-*/
 .category_block li:hover a {
     color: #ffffff;
 }

@@ -83,7 +83,7 @@
                             <div (click)="gotoProductDetails(product.id)">
                                 <img class="card-img-top" [src]="product.image_url" alt="Card image cap">
                                 <h4 class="product-title card-title"> <b> {{product.title}} </b> </h4>
-                                <p class="card-text">
+                                <p class="card-text description">
                                     {{product.description.length > 70 ? product.description.substring(0, 70) + '...' :
                                     product.description}}
                                 </p>
