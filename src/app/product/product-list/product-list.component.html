@@ -6,7 +6,7 @@
             <form class="form-inline my-2 my-lg-0">
                 <div class="input-group input-group-sm">
                     <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
-                        placeholder="Search..." (keyup)="searchProduct('search')" [(ngModel)]="search" name="search">
+                        placeholder="Search..." (keyup)="searchProduct()" [(ngModel)]="search" name="search">
                     <div class="input-group-append">
                         <button type="button" class="btn btn-secondary btn-number">
                             <i class="fa fa-search"></i>
@@ -46,29 +46,23 @@
                     </li>
                     <li class="list-group-item">
                         <div>Location</div>
-                        <div> <input type="checkbox" /> Ahmedabad </div>
-                        <div> <input type="checkbox" /> Surat </div>
-                        <div> <input type="checkbox" /> Rajkot </div>
-                        <div> <input type="checkbox" /> Baroda </div>
+                        <div *ngFor="let place of locationArr; let locationIndex = index">
+                            <input type="checkbox" (change)="selectPlaces($event, place, locationIndex)"
+                                name="location" /> {{place.name}}
+                        </div>
                     </li>
                     <li class="list-group-item">
                         <div>Rating</div>
-                        <div> <input type="checkbox" value="1" /> 1 </div>
-                        <div> <input type="checkbox" value="2" /> 2 </div>
-                        <div> <input type="checkbox" value="3" /> 3 </div>
-                        <div> <input type="checkbox" value="4" /> 4 </div>
-                        <div> <input type="checkbox" value="5" /> 5 </div>
+                        <div *ngFor="let ratings of ratingArr; let ratingIndex = index">
+                            <input type="checkbox" [(ngModel)]="selectedRating[ratingIndex + 1]" [value]="ratings"
+                                name="rating" (change)="searchProduct()" /> {{ratings}}
+                        </div>
                     </li>
                     <li class="list-group-item">
-                        <div class="stock-lbl">
-                            <input type="radio" id="instock" name="stock" value="1" (change)="searchProduct()"
-                                [(ngModel)]="stock">
-                            <label for="instock" class="instock">In Stock</label><br>
-                        </div>
-                        <div class="stock-lbl">
-                            <input type="radio" id="outstock" name="stock" value="2" (change)="searchProduct()"
-                                [(ngModel)]="stock">
-                            <label for="outstock" class="instock">Out Stock</label><br>
+                        <div class="stock-lbl" *ngFor="let stocks of stockArr">
+                            <input type="radio" id="stock" name="stock" [value]="stocks.value"
+                                (change)="searchProduct()" [(ngModel)]="is_stock">
+                            <label for="stock" class="instock">{{stocks.title}}</label><br>
                         </div>
                     </li>
                 </ul>

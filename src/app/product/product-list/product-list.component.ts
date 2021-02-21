@@ -21,7 +21,23 @@ export class ProductListComponent implements OnInit {
   productItems: any = [];
 
   search = '';
-  stock: any;
+  locationArr: any = [
+    { name: 'Ahmedabad', value: 'ahmedabad', is_selected: false },
+    { name: 'Rajkot', value: 'rajkot', is_selected: false },
+    { name: 'Baroda', value: 'baroda', is_selected: false },
+    { name: 'Surat', value: 'surat', is_selected: false }
+  ];
+  selectedLocation: any = [];
+
+  selectedRating: any = [];
+  ratingArr = [1, 2, 3, 4, 5];
+
+  is_stock: any = 'ALL';
+  stockArr: any = [
+    { title: 'In Stock', value: true },
+    { title: 'Out Stock', value: false },
+  ];
+
 
   constructor(
     public matDialog: MatDialog,
@@ -59,7 +75,7 @@ export class ProductListComponent implements OnInit {
     filterProduct.is_favourite = !filterProduct.is_favourite;
     this.getAllProducts[index] = filterProduct;
     localStorage.setItem('products', JSON.stringify(this.getAllProducts));
-    if (!this.search && !this.stock) {
+    if (!this.search && !this.is_stock) {
       this.getDataFromLocalStorage();
     }
   }
@@ -80,12 +96,7 @@ export class ProductListComponent implements OnInit {
         this.getAllProducts[index] = filterProduct;
         localStorage.setItem('products', JSON.stringify(this.getAllProducts));
         this.getDataFromLocalStorage();
-        if (this.search) {
-          this.searchProduct('search');
-        }
-        if (this.stock) {
-          this.searchProduct();
-        }
+        this.searchProduct();
       }
     });
   }
@@ -93,20 +104,32 @@ export class ProductListComponent implements OnInit {
   /**
    * search product
    */
-  searchProduct(search = ''): void {
+  searchProduct(): void {
     this.productArr = [];
-    if (search) {
-      this.productArr = this.productItems.filter(item => {
-        return this.searchItem(item);
-      });
-    } else {
-      this.productArr = this.productItems.filter(item => {
-        if (this.stock) {
-          return String(item.stock) === String(this.stock);
-        }
-      });
-    }
+    // this.productArr = this.productItems.filter(item => {
+    //   return this.searchItem(item);
+    // });
+    this.productArr = this.productItems.filter((item) =>
+      (!this.selectedRating.filter(items => items).length || this.selectedRating[item.rating])
+      && (this.is_stock === 'ALL' || item.is_stock === this.is_stock)
+      && (!this.selectedLocation.filter(items => items.is_selected).length || item.location.find(places => {
+        return this.selectedLocation.find(location => {
+          return location.is_selected && places.is_selected && location.value === places.value;
+        });
+      }))
+    );
     this.noDataFound = this.productArr.length === 0 ? general.nodatafound : '';
+  }
+
+  /**
+   * select places
+   * @param event object
+   */
+  selectPlaces(event: any, place: any, locationIndex: number): void {
+    place.is_selected = event.target.checked;
+    this.locationArr[locationIndex] = place;
+    this.selectedLocation = this.locationArr;
+    this.searchProduct();
   }
 
   /**

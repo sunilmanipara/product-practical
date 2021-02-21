@@ -5,8 +5,8 @@ export interface Products {
     image_url: string;
     price: string | number;
     rating: string | number;
-    location: any;
-    stock: string | number;
+    location: any[];
+    is_stock: boolean;
     is_favourite: boolean;
     is_soft_delete: boolean;
 }

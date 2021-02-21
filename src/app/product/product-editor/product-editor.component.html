@@ -57,20 +57,17 @@
 
         <div class="places">
             <mat-label>Location</mat-label>
-            <mat-checkbox name="ahmedabad" [(ngModel)]="product.location.ahmedabad"
-                class="location">
-                Ahmedabad</mat-checkbox>
-            <mat-checkbox name="surat" [(ngModel)]="product.location.surat" class="location">
-                Surat</mat-checkbox>
-            <mat-checkbox name="rajkot" [(ngModel)]="product.location.rajkot" class="location">
-                Rajkot</mat-checkbox>
-            <mat-checkbox name="baroda" [(ngModel)]="product.location.baroda" class="location">
-                Baroda</mat-checkbox>
+            <mat-checkbox *ngFor="let place of locationArr;let locationIndex = index" class="location"
+                (change)="selectPlaces($event, place, locationIndex)"
+                [checked]="place.is_selected" [name]="place.name">
+                {{place.name}}
+            </mat-checkbox>
         </div>
 
-        <mat-radio-group class="stock-option" name="stock" [(ngModel)]="product.stock" #stock="ngModel">
-            <mat-radio-button value="1" class="instock">In Stock</mat-radio-button>
-            <mat-radio-button value="2">Out Stock</mat-radio-button>
+        <mat-radio-group class="stock-option" name="is_stock" [(ngModel)]="product.is_stock" #is_stock="ngModel">
+            <mat-radio-button *ngFor="let stock of stockArr" [value]="stock.value" class="instock">
+                {{stock.title}}
+            </mat-radio-button>
         </mat-radio-group>
 
         <div class="buttons">
