@@ -6,8 +6,7 @@
             <form class="form-inline my-2 my-lg-0">
                 <div class="input-group input-group-sm">
                     <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
-                        placeholder="Search..." (keyup)="searchProduct('search')" [(ngModel)]="search"
-                        name="search">
+                        placeholder="Search..." (keyup)="searchProduct('search')" [(ngModel)]="search" name="search">
                     <div class="input-group-append">
                         <button type="button" class="btn btn-secondary btn-number">
                             <i class="fa fa-search"></i>
@@ -91,9 +90,11 @@
                             </div>
                             <div class="row actions">
                                 <i [class]="product.is_favourite ? 'fa fa-heart like-heart' : 'fa fa-heart-o like-heart'"
-                                    aria-hidden="true" (click)="likeProduct(product.id)"></i>
-                                <i class="fa fa-trash" (click)="removeProduct(product.id)"></i>
-                                <i class="fa fa-pencil-square-o" [routerLink]="[productedit, product.id]"></i>
+                                    [matTooltip]="product.is_favourite ? 'Unlike' : 'Like'" aria-hidden="true"
+                                    (click)="likeProduct(product.id)"></i>
+                                <i class="fa fa-trash" (click)="removeProduct(product.id)" matTooltip="Remove"></i>
+                                <i class="fa fa-pencil-square-o" [routerLink]="[productedit, product.id]"
+                                    matTooltip="Edit"></i>
                             </div>
                         </div>
                     </div>
@@ -105,6 +106,6 @@
         </div>
     </div>
     <div class="add-floating">
-        <i class="fa fa-plus add-icon cursorpointer" [routerLink]="[productadd]"></i>
+        <mat-icon class="add-icon cursorpointer" [routerLink]="[productadd]" matTooltip="Add product">add</mat-icon>
     </div>
 </div>

@@ -34,8 +34,8 @@
                             <h3 class="price"> <b> $ {{product.price}} </b> </h3>
                         </div>
                         <div class="row actions">
-                            <i class="fa fa-undo" (click)="restoreProduct(product.id)"></i>
-                            <i class="fa fa-trash" (click)="removeProduct(product.id)"></i>
+                            <i class="fa fa-undo" (click)="restoreProduct(product.id)" matTooltip="Restore"></i>
+                            <i class="fa fa-trash" (click)="removeProduct(product.id)" matTooltip="Remove permanently"></i>
                         </div>
                     </div>
                 </div>
