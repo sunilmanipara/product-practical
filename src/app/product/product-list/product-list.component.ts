@@ -29,7 +29,6 @@ export class ProductListComponent implements OnInit {
     { price: '3000 - 4000', min: 3000, max: 4000 },
     { price: '4000 - 5000', min: 4000, max: 5000 },
   ];
-  // selectedPrice: any = [];
 
   locationArr: any = [
     { name: 'Ahmedabad', value: 'ahmedabad' },
@@ -37,7 +36,6 @@ export class ProductListComponent implements OnInit {
     { name: 'Baroda', value: 'baroda' },
     { name: 'Surat', value: 'surat' }
   ];
-  // selectedLocation: any = [];
 
   selectedRating: any = [];
   ratingArr = [1, 2, 3, 4, 5];
@@ -135,6 +133,9 @@ export class ProductListComponent implements OnInit {
     this.noDataFound = this.productArr.length === 0 ? general.nodatafound : '';
   }
 
+  /**
+   * clear filter
+   */
   clearFliter(): any {
     this.productArr = this.productItems;
     this.search = '';
@@ -153,9 +154,7 @@ export class ProductListComponent implements OnInit {
    * @param event object
    */
   selectPlaces(event: any, place: any, locationIndex: number): void {
-    // place.is_selected = event.target.checked;
     this.locationArr[locationIndex]['is_selected'] = event.target.checked;
-    // this.selectedLocation = this.locationArr;
     this.searchProduct();
   }
 
@@ -168,8 +167,6 @@ export class ProductListComponent implements OnInit {
   selectPrice(event: any, pricerange: any, priceIndex: number): any {
     pricerange.is_selected = event.target.checked;
     this.priceArr[priceIndex] = pricerange;
-    // this.selectedPrice = this.priceArr;
-    // console.log(this.selectedPrice);
     this.searchProduct();
   }
 
