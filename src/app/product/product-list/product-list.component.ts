@@ -21,13 +21,23 @@ export class ProductListComponent implements OnInit {
   productItems: any = [];
 
   search = '';
-  locationArr: any = [
-    { name: 'Ahmedabad', value: 'ahmedabad', is_selected: false },
-    { name: 'Rajkot', value: 'rajkot', is_selected: false },
-    { name: 'Baroda', value: 'baroda', is_selected: false },
-    { name: 'Surat', value: 'surat', is_selected: false }
+
+  priceArr: any = [
+    { price: '100 - 1000', min: 100, max: 1000 },
+    { price: '1000 - 2000', min: 1000, max: 2000 },
+    { price: '2000 - 3000', min: 2000, max: 3000 },
+    { price: '3000 - 4000', min: 3000, max: 4000 },
+    { price: '4000 - 5000', min: 4000, max: 5000 },
   ];
-  selectedLocation: any = [];
+  // selectedPrice: any = [];
+
+  locationArr: any = [
+    { name: 'Ahmedabad', value: 'ahmedabad' },
+    { name: 'Rajkot', value: 'rajkot' },
+    { name: 'Baroda', value: 'baroda' },
+    { name: 'Surat', value: 'surat' }
+  ];
+  // selectedLocation: any = [];
 
   selectedRating: any = [];
   ratingArr = [1, 2, 3, 4, 5];
@@ -106,19 +116,36 @@ export class ProductListComponent implements OnInit {
    */
   searchProduct(): void {
     this.productArr = [];
-    // this.productArr = this.productItems.filter(item => {
-    //   return this.searchItem(item);
-    // });
     this.productArr = this.productItems.filter((item) =>
-      (!this.selectedRating.filter(items => items).length || this.selectedRating[item.rating])
+      (!this.search || this.searchItem(item))
+      && (!this.selectedRating.filter(items => items).length || this.selectedRating[item.rating])
       && (this.is_stock === 'ALL' || item.is_stock === this.is_stock)
-      && (!this.selectedLocation.filter(items => items.is_selected).length || item.location.find(places => {
-        return this.selectedLocation.find(location => {
+      && (!this.locationArr.filter(items => items.is_selected).length || item.location.find(places => {
+        return this.locationArr.find(location => {
           return location.is_selected && places.is_selected && location.value === places.value;
         });
       }))
+      && (!this.priceArr.filter(items => items.is_selected).length ||
+        this.priceArr.find(findprice => {
+          return findprice.is_selected
+            && (findprice.min <= item.price && findprice.max >= item.price);
+        })
+      )
     );
     this.noDataFound = this.productArr.length === 0 ? general.nodatafound : '';
+  }
+
+  clearFliter(): any {
+    this.productArr = this.productItems;
+    this.search = '';
+    this.selectedRating = [];
+    this.is_stock = 'ALL';
+    this.priceArr.forEach(element => {
+      delete element.is_selected;
+    });
+    this.locationArr.forEach(element => {
+      delete element.is_selected;
+    });
   }
 
   /**
@@ -126,9 +153,23 @@ export class ProductListComponent implements OnInit {
    * @param event object
    */
   selectPlaces(event: any, place: any, locationIndex: number): void {
-    place.is_selected = event.target.checked;
-    this.locationArr[locationIndex] = place;
-    this.selectedLocation = this.locationArr;
+    // place.is_selected = event.target.checked;
+    this.locationArr[locationIndex]['is_selected'] = event.target.checked;
+    // this.selectedLocation = this.locationArr;
+    this.searchProduct();
+  }
+
+  /**
+   * selecte price
+   * @param event any
+   * @param pricerange price range
+   * @param priceIndex price index
+   */
+  selectPrice(event: any, pricerange: any, priceIndex: number): any {
+    pricerange.is_selected = event.target.checked;
+    this.priceArr[priceIndex] = pricerange;
+    // this.selectedPrice = this.priceArr;
+    // console.log(this.selectedPrice);
     this.searchProduct();
   }
 

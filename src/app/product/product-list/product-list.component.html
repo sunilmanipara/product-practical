@@ -38,17 +38,20 @@
                     <i class="fa fa-list"></i> Categories
                 </div>
                 <ul class="list-group category_block">
+                    <li class="list-group-item" (click)="clearFliter()"> Clear </li>
                     <li class="list-group-item">
                         <div>Price</div>
-                        <div> <input type="checkbox" /> 100 - 1000 </div>
-                        <div> <input type="checkbox" /> 1000 - 2000 </div>
-                        <div> <input type="checkbox" /> 2000 - 3000 </div>
+                        <div *ngFor="let pricerange of priceArr; let priceIndex = index">
+                            <input type="checkbox" [(ngModel)]="pricerange.is_selected"
+                                (change)="selectPrice($event, pricerange, priceIndex)" />
+                            {{pricerange.price}}
+                        </div>
                     </li>
                     <li class="list-group-item">
                         <div>Location</div>
                         <div *ngFor="let place of locationArr; let locationIndex = index">
-                            <input type="checkbox" (change)="selectPlaces($event, place, locationIndex)"
-                                name="location" /> {{place.name}}
+                            <input type="checkbox" [(ngModel)]="place.is_selected"
+                                (change)="selectPlaces($event, place, locationIndex)" name="location" /> {{place.name}}
                         </div>
                     </li>
                     <li class="list-group-item">
